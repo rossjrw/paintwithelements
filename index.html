@@ -125,13 +125,13 @@ function create(){
 	bbc.appendChild(document.createTextNode(txt.slice(0, -1)));
 }
 </script>
-<form>
+<form action="javascript:create()">
 	<label for="inwidth">Width</label>
 	<input type="number" id="inwidth" placeholder="width" min="0" max="50" value="50" required>
 	<br>
 	<label for="inheight">Height</label>
 	<input type="number" id="inheight" placeholder="height" min="0" max="50" value="50" required>
-	<input type="button" value="create" onclick="create()">
+	<input type="submit" value="create">
 </form>
 <pre id="bbcode"></pre>
 </body>
