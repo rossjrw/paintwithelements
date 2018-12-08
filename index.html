@@ -1,138 +1,139 @@
 <!doctype html>
 <html>
 <head>
-<style>
-img[src^="img"] {
-	cursor: pointer;
-}
-img.dot {
-	width:16px;
-	height:16px;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	cursor: cell;
-	vertical-align: bottom;
-}
-</style>
+	<style>
+	img[src^="img"] {
+		cursor: pointer;
+	}
+	img.dot {
+		width:16px;
+		height:16px;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		cursor: cell;
+		vertical-align: bottom;
+	}
+	</style>
 </head>
 <body>
-<p>This tool was made by serprex</p>
-<script>
-"use strict";
-var smileys = [
-	{ sCode: ':)', sSrc: 'img/smiley.gif' },
-	{ sCode: ';)', sSrc: 'img/wink.gif' },
-	{ sCode: ':D', sSrc: 'img/cheesy.gif' },
-	{ sCode: ';D', sSrc: 'img/grin.gif' },
-	{ sCode: '>:(', sSrc: 'img/angry.gif' },
-	{ sCode: ':(', sSrc: 'img/sad.gif' },
-	{ sCode: ':o', sSrc: 'img/shocked.gif' },
-	{ sCode: '8)', sSrc: 'img/cool.gif' },
-	{ sCode: '?_?', sSrc: 'img/huh.gif' },
-	{ sCode: '::)', sSrc: 'img/rolleyes.gif' },
-	{ sCode: ':P', sSrc: 'img/tongue.gif' },
-	{ sCode: ':-[', sSrc: 'img/embarrassed.gif' },
-	{ sCode: ':-X', sSrc: 'img/lipsrsealed.gif' },
-	{ sCode: ':-\\', sSrc: 'img/undecided.gif' },
-	{ sCode: ':-*', sSrc: 'img/kiss.gif' },
-	{ sCode: ':\'(', sSrc: 'img/cry.gif' },
-	{ sCode: ':chroma', sSrc: 'img/chroma18x18.png' },
-	{ sCode: ':entropy', sSrc: 'img/entropy18x18.png' },
-	{ sCode: ':death', sSrc: 'img/death18x18.png' },
-	{ sCode: ':gravity', sSrc: 'img/gravity18x18.png' },
-	{ sCode: ':earth', sSrc: 'img/earth18x18.png' },
-	{ sCode: ':life', sSrc: 'img/life18x18.png' },
-	{ sCode: ':fire', sSrc: 'img/fire18x18.png' },
-	{ sCode: ':water', sSrc: 'img/water18x18.png' },
-	{ sCode: ':light', sSrc: 'img/light18x18.png' },
-	{ sCode: ':air', sSrc: 'img/air18x18.png' },
-	{ sCode: ':time', sSrc: 'img/time18x18.png' },
-	{ sCode: ':darkness', sSrc: 'img/darkness18x18.png' },
-	{ sCode: ':aether', sSrc: 'img/aether18x18.png' },
-	{ sCode: ':underworld', sSrc: 'img/underworld18x18.png' },
-	{ sCode: ':rainbow', sSrc: 'img/rainbow18x18.png' },
-	{ sCode: ':electrum', sSrc: 'img/electrum.png' },
-	{ sCode: ':silly:', sSrc: 'img/silly.png' },
-	{ sCode: ':sillyspin:', sSrc: 'img/sillyspin.gif' },
-	{ sCode: 'ERROR', sSrc: 'img/xx.gif' },
-];
-var nosrc = "img/xx.gif"
-var srcToCode = {}, brush = nosrc;
-var mouseDown;
-document.addEventListener("mousedown", function(){
-	mouseDown = true;
-});
-document.addEventListener("mouseup", function(){
-	mouseDown = false;
-});
-document.ondragstart = function(e){
-	e.preventDefault();
-	return false;
-}
-smileys.forEach(function(obj){
-	var img = new Image();
-	img.src = obj.sSrc;
-	img.onclick = function(){
-		brush = img.src;
+	<p>Paint with Elements v1.1</p>
+	<p>Created by serprex, modified by CO</p>
+	<script>
+	"use strict";
+	var smileys = [
+		{ sCode: ':)', sSrc: 'img/smiley.gif' },
+		{ sCode: ';)', sSrc: 'img/wink.gif' },
+		{ sCode: ':D', sSrc: 'img/cheesy.gif' },
+		{ sCode: ';D', sSrc: 'img/grin.gif' },
+		{ sCode: '>:(', sSrc: 'img/angry.gif' },
+		{ sCode: ':(', sSrc: 'img/sad.gif' },
+		{ sCode: ':o', sSrc: 'img/shocked.gif' },
+		{ sCode: '8)', sSrc: 'img/cool.gif' },
+		{ sCode: '?_?', sSrc: 'img/huh.gif' },
+		{ sCode: '::)', sSrc: 'img/rolleyes.gif' },
+		{ sCode: ':P', sSrc: 'img/tongue.gif' },
+		{ sCode: ':-[', sSrc: 'img/embarrassed.gif' },
+		{ sCode: ':-X', sSrc: 'img/lipsrsealed.gif' },
+		{ sCode: ':-\\', sSrc: 'img/undecided.gif' },
+		{ sCode: ':-*', sSrc: 'img/kiss.gif' },
+		{ sCode: ':\'(', sSrc: 'img/cry.gif' },
+		{ sCode: ':chroma', sSrc: 'img/chroma18x18.png' },
+		{ sCode: ':entropy', sSrc: 'img/entropy18x18.png' },
+		{ sCode: ':death', sSrc: 'img/death18x18.png' },
+		{ sCode: ':gravity', sSrc: 'img/gravity18x18.png' },
+		{ sCode: ':earth', sSrc: 'img/earth18x18.png' },
+		{ sCode: ':life', sSrc: 'img/life18x18.png' },
+		{ sCode: ':fire', sSrc: 'img/fire18x18.png' },
+		{ sCode: ':water', sSrc: 'img/water18x18.png' },
+		{ sCode: ':light', sSrc: 'img/light18x18.png' },
+		{ sCode: ':air', sSrc: 'img/air18x18.png' },
+		{ sCode: ':time', sSrc: 'img/time18x18.png' },
+		{ sCode: ':darkness', sSrc: 'img/darkness18x18.png' },
+		{ sCode: ':aether', sSrc: 'img/aether18x18.png' },
+		{ sCode: ':underworld', sSrc: 'img/underworld18x18.png' },
+		{ sCode: ':rainbow', sSrc: 'img/rainbow18x18.png' },
+		{ sCode: ':electrum', sSrc: 'img/electrum.png' },
+		{ sCode: ':silly:', sSrc: 'img/silly.png' },
+		{ sCode: ':sillyspin:', sSrc: 'img/sillyspin.gif' },
+		{ sCode: 'ERROR', sSrc: 'img/xx.gif' },
+	];
+	var nosrc = "img/xx.gif"
+	var srcToCode = {}, brush = nosrc;
+	var mouseDown;
+	document.addEventListener("mousedown", function(){
+		mouseDown = true;
+	});
+	document.addEventListener("mouseup", function(){
+		mouseDown = false;
+	});
+	document.ondragstart = function(e){
+		e.preventDefault();
+		return false;
 	}
-	srcToCode[obj.sSrc] = obj.sCode;
-	document.body.appendChild(img);
-});
-	console.log(srcToCode);
-document.body.appendChild(document.createElement("br"));
-document.body.appendChild(document.createElement("br"));
-var imgs = [];
-for(var i=0; i<50; i++){
-	imgs[i] = [];
-	for(var j=0;j<50;j++){
-		var img = imgs[i][j] = new Image();
-		img.className = "dot";
-		img.src = nosrc;
+	smileys.forEach(function(obj){
+		var img = new Image();
+		img.src = obj.sSrc;
 		img.onclick = function(){
-			this.src = brush;
+			brush = img.src;
 		}
-		img.onmouseenter = function(){
-			if(mouseDown) this.src = brush;
-		}
+		srcToCode[obj.sSrc] = obj.sCode;
 		document.body.appendChild(img);
-	}
+	});
+		console.log(srcToCode);
 	document.body.appendChild(document.createElement("br"));
-}
-function create(){
-	var bbc = document.getElementById("bbcode");
-	// clear out the previous bbcode
-	while(bbc.firstChild) bbc.firstChild.remove();
-	var txt = "",
-	    // width and height are the wrong way round
-	    h = parseInt(document.getElementById("inwidth").value),
-	    w = parseInt(document.getElementById("inheight").value);
-	for(var i = 0; i < 50; i++) {
-		for(var j = 0; j < 50; j++) {
-				if(i < w && j < h) {
-					imgs[i][j].style.opacity = 1;
-					console.log(imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]);
-					txt += srcToCode[imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]]+" ";
-				} else {
-					imgs[i][j].style.opacity = 0.5;
-				}
+	document.body.appendChild(document.createElement("br"));
+	var imgs = [];
+	for(var i=0; i<50; i++){
+		imgs[i] = [];
+		for(var j=0;j<50;j++){
+			var img = imgs[i][j] = new Image();
+			img.className = "dot";
+			img.src = nosrc;
+			img.onclick = function(){
+				this.src = brush;
+			}
+			img.onmouseenter = function(){
+				if(mouseDown) this.src = brush;
+			}
+			document.body.appendChild(img);
 		}
-		txt = txt.slice(0, -1) + "\n";
+		document.body.appendChild(document.createElement("br"));
 	}
-	if(/.*ERROR.*/.test(txt)) txt = "Please ensure all placeholders are filled!\n" + txt;
-	bbc.appendChild(document.createTextNode(txt.slice(0, -1)));
-}
-</script>
-<form action="javascript:create()">
-	<label for="inwidth">Width</label>
-	<input type="number" id="inwidth" placeholder="width" min="0" max="50" value="50" required>
-	<br>
-	<label for="inheight">Height</label>
-	<input type="number" id="inheight" placeholder="height" min="0" max="50" value="50" required>
-	<input type="submit" value="create">
-</form>
-<pre id="bbcode"></pre>
+	function create(){
+		var bbc = document.getElementById("bbcode");
+		// clear out the previous bbcode
+		while(bbc.firstChild) bbc.firstChild.remove();
+		var txt = "",
+		    // width and height are the wrong way round
+		    h = parseInt(document.getElementById("inwidth").value),
+		    w = parseInt(document.getElementById("inheight").value);
+		for(var i = 0; i < 50; i++) {
+			for(var j = 0; j < 50; j++) {
+					if(i < w && j < h) {
+						imgs[i][j].style.opacity = 1;
+						console.log(imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]);
+						txt += srcToCode[imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]]+" ";
+					} else {
+						imgs[i][j].style.opacity = 0.5;
+					}
+			}
+			txt = txt.slice(0, -1) + "\n";
+		}
+		if(/.*ERROR.*/.test(txt)) txt = "Please ensure all placeholders are filled!\n" + txt;
+		bbc.appendChild(document.createTextNode(txt.slice(0, -1)));
+	}
+	</script>
+	<form action="javascript:create()">
+		<label for="inwidth">Width</label>
+		<input type="number" id="inwidth" placeholder="width" min="0" max="50" value="50" required>
+		<br>
+		<label for="inheight">Height</label>
+		<input type="number" id="inheight" placeholder="height" min="0" max="50" value="50" required>
+		<input type="submit" value="create">
+	</form>
+	<pre id="bbcode"></pre>
 </body>
 </html>
