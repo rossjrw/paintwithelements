@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+<head>
+<style>
+.dot{
+	width:16px;
+	height:16px;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+</style>
+</head>
+<body>
+<p>This tool was made by serprex</p>
+<script>
+"use strict";
+var smileys = [
+	{
+		sCode: ':)',
+		sSrc: '/img/smiley.gif',
+	},
+	{
+		sCode: ';)',
+		sSrc: '/img/wink.gif',
+	},
+	{
+		sCode: ':D',
+		sSrc: '/img/cheesy.gif',
+	},
+	{
+		sCode: ';D',
+		sSrc: '/img/grin.gif',
+	},
+	{
+		sCode: '>:(',
+		sSrc: '/img/angry.gif',
+	},
+	{
+		sCode: ':(',
+		sSrc: '/img/sad.gif',
+	},
+	{
+		sCode: ':o',
+		sSrc: '/img/shocked.gif',
+	},
+	{
+		sCode: '8)',
+		sSrc: '/img/cool.gif',
+	},
+	{
+		sCode: '?_?',
+		sSrc: '/img/huh.gif',
+	},
+	{
+		sCode: '::)',
+		sSrc: '/img/rolleyes.gif',
+	},
+	{
+		sCode: ':P',
+		sSrc: '/img/tongue.gif',
+	},
+	{
+		sCode: ':-[',
+		sSrc: '/img/embarrassed.gif',
+	},
+	{
+		sCode: ':-X',
+		sSrc: '/img/lipsrsealed.gif',
+	},
+	{
+		sCode: ':-\\',
+		sSrc: '/img/undecided.gif',
+	},
+	{
+		sCode: ':-*',
+		sSrc: '/img/kiss.gif',
+	},
+	{
+		sCode: ':\'(',
+		sSrc: '/img/cry.gif',
+	},
+	{
+		sCode: ':chroma',
+		sSrc: '/img/chroma18x18.png',
+	},
+	{
+		sCode: ':entropy',
+		sSrc: '/img/entropy18x18.png',
+	},
+	{
+		sCode: ':death',
+		sSrc: '/img/death18x18.png',
+	},
+	{
+		sCode: ':gravity',
+		sSrc: '/img/gravity18x18.png',
+	},
+	{
+		sCode: ':earth',
+		sSrc: '/img/earth18x18.png',
+	},
+	{
+		sCode: ':life',
+		sSrc: '/img/life18x18.png',
+	},
+	{
+		sCode: ':fire',
+		sSrc: '/img/fire18x18.png',
+	},
+	{
+		sCode: ':water',
+		sSrc: '/img/water18x18.png',
+	},
+	{
+		sCode: ':light',
+		sSrc: '/img/light18x18.png',
+	},
+	{
+		sCode: ':air',
+		sSrc: '/img/air18x18.png',
+	},
+	{
+		sCode: ':time',
+		sSrc: '/img/time18x18.png',
+	},
+	{
+		sCode: ':darkness',
+		sSrc: '/img/darkness18x18.png',
+	},
+	{
+		sCode: ':aether',
+		sSrc: '/img/aether18x18.png',
+	},
+	{
+		sCode: ':underworld',
+		sSrc: '/img/underworld18x18.png',
+	},
+	{
+		sCode: ':rainbow',
+		sSrc: '/img/rainbow18x18.png',
+	},
+	{
+		sCode: ':electrum',
+		sSrc: '/img/electrum.png',
+	}
+];
+var nosrc = "http://elementscommunity.org/forum/Themes/default/images/post/xx.gif"
+var srcToCode = {}, brush = nosrc;
+smileys.push({
+	sCode:"ERROR",
+	sSrc:nosrc,
+});
+var mouseDown;
+document.addEventListener("mousedown", function(){
+	mouseDown = true;
+});
+document.addEventListener("mouseup", function(){
+	mouseDown = false;
+});
+document.ondragstart = function(e){
+	e.preventDefault();
+	return false;
+}
+smileys.forEach(function(obj){
+	var img = new Image();
+	img.src = obj.sSrc;
+	img.onclick = function(){
+		brush = img.src;
+	}
+	srcToCode[obj.sSrc] = obj.sCode;
+	document.body.appendChild(img);
+});
+document.body.appendChild(document.createElement("br"));
+document.body.appendChild(document.createElement("br"));
+var imgs = [];
+for(var i=0; i<50; i++){
+	imgs[i] = [];
+	for(var j=0;j<50;j++){
+		var img = imgs[i][j] = new Image();
+		img.className = "dot";
+		img.src = nosrc;
+		img.onclick = function(){
+			this.src = brush;
+		}
+		img.onmouseenter = function(){
+			if (mouseDown) this.src = brush;
+		}
+		document.body.appendChild(img);
+	}
+	document.body.appendChild(document.createElement("br"));
+}
+function create(){
+	var bbc = document.getElementById("bbcode");
+	while (bbc.firstChild) bbc.firstChild.remove();
+	var txt = "",
+		w= parseInt(document.getElementById("inwidth").value),
+		h = parseInt(document.getElementById("inheight").value);
+	for(var i=0; i<w;i++){
+		for(var j=0;j<h;j++){
+			console.log(imgs[i][j].src);
+			txt += srcToCode[imgs[i][j].src]+" ";
+		}
+		txt = txt.slice(0, -1) + "\n";
+	}
+	bbc.appendChild(document.createTextNode(txt.slice(0, -1)));
+}
+</script>
+<input type="input" id="inwidth" placeholder="width">
+<input type="input" id="inheight" placeholder="height">
+<input type="button" value="create" onclick="create()">
+<pre id="bbcode"></pre>
+</body>
+</html>
