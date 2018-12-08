@@ -10,6 +10,10 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	cursor: cell;
+}
+img[src^="img"] {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -18,141 +22,44 @@
 <script>
 "use strict";
 var smileys = [
-	{
-		sCode: ':)',
-		sSrc: 'img/smiley.gif',
-	},
-	{
-		sCode: ';)',
-		sSrc: 'img/wink.gif',
-	},
-	{
-		sCode: ':D',
-		sSrc: 'img/cheesy.gif',
-	},
-	{
-		sCode: ';D',
-		sSrc: 'img/grin.gif',
-	},
-	{
-		sCode: '>:(',
-		sSrc: 'img/angry.gif',
-	},
-	{
-		sCode: ':(',
-		sSrc: 'img/sad.gif',
-	},
-	{
-		sCode: ':o',
-		sSrc: 'img/shocked.gif',
-	},
-	{
-		sCode: '8)',
-		sSrc: 'img/cool.gif',
-	},
-	{
-		sCode: '?_?',
-		sSrc: 'img/huh.gif',
-	},
-	{
-		sCode: '::)',
-		sSrc: 'img/rolleyes.gif',
-	},
-	{
-		sCode: ':P',
-		sSrc: 'img/tongue.gif',
-	},
-	{
-		sCode: ':-[',
-		sSrc: 'img/embarrassed.gif',
-	},
-	{
-		sCode: ':-X',
-		sSrc: 'img/lipsrsealed.gif',
-	},
-	{
-		sCode: ':-\\',
-		sSrc: 'img/undecided.gif',
-	},
-	{
-		sCode: ':-*',
-		sSrc: 'img/kiss.gif',
-	},
-	{
-		sCode: ':\'(',
-		sSrc: 'img/cry.gif',
-	},
-	{
-		sCode: ':chroma',
-		sSrc: 'img/chroma18x18.png',
-	},
-	{
-		sCode: ':entropy',
-		sSrc: 'img/entropy18x18.png',
-	},
-	{
-		sCode: ':death',
-		sSrc: 'img/death18x18.png',
-	},
-	{
-		sCode: ':gravity',
-		sSrc: 'img/gravity18x18.png',
-	},
-	{
-		sCode: ':earth',
-		sSrc: 'img/earth18x18.png',
-	},
-	{
-		sCode: ':life',
-		sSrc: 'img/life18x18.png',
-	},
-	{
-		sCode: ':fire',
-		sSrc: 'img/fire18x18.png',
-	},
-	{
-		sCode: ':water',
-		sSrc: 'img/water18x18.png',
-	},
-	{
-		sCode: ':light',
-		sSrc: 'img/light18x18.png',
-	},
-	{
-		sCode: ':air',
-		sSrc: 'img/air18x18.png',
-	},
-	{
-		sCode: ':time',
-		sSrc: 'img/time18x18.png',
-	},
-	{
-		sCode: ':darkness',
-		sSrc: 'img/darkness18x18.png',
-	},
-	{
-		sCode: ':aether',
-		sSrc: 'img/aether18x18.png',
-	},
-	{
-		sCode: ':underworld',
-		sSrc: 'img/underworld18x18.png',
-	},
-	{
-		sCode: ':rainbow',
-		sSrc: 'img/rainbow18x18.png',
-	},
-	{
-		sCode: ':electrum',
-		sSrc: 'img/electrum.png',
-	}
+	{ sCode: ':)', sSrc: 'img/smiley.gif' },
+	{ sCode: ';)', sSrc: 'img/wink.gif' },
+	{ sCode: ':D', sSrc: 'img/cheesy.gif' },
+	{ sCode: ';D', sSrc: 'img/grin.gif' },
+	{ sCode: '>:(', sSrc: 'img/angry.gif' },
+	{ sCode: ':(', sSrc: 'img/sad.gif' },
+	{ sCode: ':o', sSrc: 'img/shocked.gif' },
+	{ sCode: '8)', sSrc: 'img/cool.gif' },
+	{ sCode: '?_?', sSrc: 'img/huh.gif' },
+	{ sCode: '::)', sSrc: 'img/rolleyes.gif' },
+	{ sCode: ':P', sSrc: 'img/tongue.gif' },
+	{ sCode: ':-[', sSrc: 'img/embarrassed.gif' },
+	{ sCode: ':-X', sSrc: 'img/lipsrsealed.gif' },
+	{ sCode: ':-\\', sSrc: 'img/undecided.gif' },
+	{ sCode: ':-*', sSrc: 'img/kiss.gif' },
+	{ sCode: ':\'(', sSrc: 'img/cry.gif' },
+	{ sCode: ':chroma', sSrc: 'img/chroma18x18.png' },
+	{ sCode: ':entropy', sSrc: 'img/entropy18x18.png' },
+	{ sCode: ':death', sSrc: 'img/death18x18.png' },
+	{ sCode: ':gravity', sSrc: 'img/gravity18x18.png' },
+	{ sCode: ':earth', sSrc: 'img/earth18x18.png' },
+	{ sCode: ':life', sSrc: 'img/life18x18.png' },
+	{ sCode: ':fire', sSrc: 'img/fire18x18.png' },
+	{ sCode: ':water', sSrc: 'img/water18x18.png' },
+	{ sCode: ':light', sSrc: 'img/light18x18.png' },
+	{ sCode: ':air', sSrc: 'img/air18x18.png' },
+	{ sCode: ':time', sSrc: 'img/time18x18.png' },
+	{ sCode: ':darkness', sSrc: 'img/darkness18x18.png' },
+	{ sCode: ':aether', sSrc: 'img/aether18x18.png' },
+	{ sCode: ':underworld', sSrc: 'img/underworld18x18.png' },
+	{ sCode: ':rainbow', sSrc: 'img/rainbow18x18.png' },
+	{ sCode: ':electrum', sSrc: 'img/electrum.png' },
+	{ sCode: ':silly:', sSrc: 'img/silly.png' },
+	{ sCode: ':sillyspin:', sSrc: 'img/sillyspin.gif' },
+	{ sCode: 'ERROR', sSrc: 'img/xx.gif' },
 ];
-var nosrc = "http://elementscommunity.org/forum/Themes/default/images/post/xx.gif"
+var nosrc = "img/xx.gif"
 var srcToCode = {}, brush = nosrc;
-smileys.push({
-	sCode:"ERROR",
-	sSrc:nosrc,
-});
 var mouseDown;
 document.addEventListener("mousedown", function(){
 	mouseDown = true;
@@ -173,6 +80,7 @@ smileys.forEach(function(obj){
 	srcToCode[obj.sSrc] = obj.sCode;
 	document.body.appendChild(img);
 });
+	console.log(srcToCode);
 document.body.appendChild(document.createElement("br"));
 document.body.appendChild(document.createElement("br"));
 var imgs = [];
@@ -186,7 +94,7 @@ for(var i=0; i<50; i++){
 			this.src = brush;
 		}
 		img.onmouseenter = function(){
-			if (mouseDown) this.src = brush;
+			if(mouseDown) this.src = brush;
 		}
 		document.body.appendChild(img);
 	}
@@ -194,23 +102,36 @@ for(var i=0; i<50; i++){
 }
 function create(){
 	var bbc = document.getElementById("bbcode");
-	while (bbc.firstChild) bbc.firstChild.remove();
+	// clear out the previous bbcode
+	while(bbc.firstChild) bbc.firstChild.remove();
 	var txt = "",
-		w= parseInt(document.getElementById("inwidth").value),
-		h = parseInt(document.getElementById("inheight").value);
-	for(var i=0; i<w;i++){
-		for(var j=0;j<h;j++){
-			console.log(imgs[i][j].src);
-			txt += srcToCode[imgs[i][j].src]+" ";
+	    // width and height are the wrong way round
+	    h = parseInt(document.getElementById("inwidth").value),
+	    w = parseInt(document.getElementById("inheight").value);
+	for(var i = 0; i < 50; i++) {
+		for(var j = 0; j < 50; j++) {
+				if(i < w && j < h) {
+					imgs[i][j].style.opacity = 1;
+					console.log(imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]);
+					txt += srcToCode[imgs[i][j].src.match(/img\/[^\/]*\....$/g)[0]]+" ";
+				} else {
+					imgs[i][j].style.opacity = 0.5;
+				}
 		}
 		txt = txt.slice(0, -1) + "\n";
 	}
+	if(/.*ERROR.*/.test(txt)) txt = "Please ensure all placeholders are filled!\n" + txt;
 	bbc.appendChild(document.createTextNode(txt.slice(0, -1)));
 }
 </script>
-<input type="input" id="inwidth" placeholder="width">
-<input type="input" id="inheight" placeholder="height">
-<input type="button" value="create" onclick="create()">
+<form>
+	<label for="inwidth">Width</label>
+	<input type="number" id="inwidth" placeholder="width" min="0" max="50" value="50" required>
+	<br>
+	<label for="inheight">Height</label>
+	<input type="number" id="inheight" placeholder="height" min="0" max="50" value="50" required>
+	<input type="button" value="create" onclick="create()">
+</form>
 <pre id="bbcode"></pre>
 </body>
 </html>
